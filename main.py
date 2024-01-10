@@ -13,14 +13,18 @@ from PyQt5.QtWidgets import (QApplication, QHBoxLayout, QLabel, QLineEdit,
 def autohotkey_install():
     script = sys._MEIPASS
     autohotkey_path = r"C:\Program Files\AutoHotkey\AutoHotkey.exe"
+    compiler_path = r"C:\Program Files\AutoHotkey\Compiler"
+
     if not os.path.exists(autohotkey_path):
-        subprocess.run(
-            [f"{script}\\AutoHotKey.exe", "/S", "/D=C:\Program Files\AutoHotkey"], check=True)
-    path = r"C:\Program Files\AutoHotkey\Compiler"
-    os.makedirs(path, exist_ok=True)
+        subprocess.run([f"{script}\\AutoHotKey.exe", "/S",
+                       "/D=C:\Program Files\AutoHotkey"], check=True)
+
+    os.makedirs(compiler_path, exist_ok=True)
     current_path = os.environ.get("PATH", "")
-    if path not in current_path:
-        os.environ["PATH"] = f"{current_path};{path}"
+    if compiler_path not in current_path:
+        os.environ["PATH"] = f"{current_path};{compiler_path}"
+
+
 autohotkey_install()
 
 
@@ -31,7 +35,7 @@ def run():
     output_file = os.path.join(current_dir, "browser.exe")
     shutil.copy(config_file, script)
     os.system(
-        f"AHk2Exe.exe /in {script}\\browser.ahk /out \"{output_file}\" /icon {script}\\icon.ico")
+        f"AHk2Exe.exe /in {script}\\browser.ahk /out \"{output_file}\" /icon {script}\\icon.ico /bin {script}\\AutoHotkeySC.bin")
 
 class SuperPC(QMainWindow):
     def __init__(self):

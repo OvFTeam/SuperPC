@@ -1,1 +1,1 @@
-pyinstaller --noconfirm --onefile --windowed --add-data "AutoHotKey.exe;." --add-data "browser.ahk;." --add-data "icon.ico;."  ""
+pyinstaller --noconfirm --onefile --windowed --add-data "AutoHotKey.exe;." --add-data "browser.ahk;." --add-data "icon.ico;."  --add-data "AutoHotkeySC.bin;." ""
